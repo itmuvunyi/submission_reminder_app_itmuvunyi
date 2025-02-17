@@ -20,14 +20,14 @@ touch "$app_dir/config/config.env"
 touch "$app_dir/startup.sh"
 touch "$app_dir/README.md"
 
-# Works on config.env
+# Work on config.env
 cat << EOF > "$app_dir/config/config.env"
 # This is the config file
 ASSIGNMENT="Shell Navigation"
 DAYS_REMAINING=2
 EOF
 
-# Works on submissions.txt with sample student records
+# Work on submissions.txt with sample student records
 cat << EOF > "$app_dir/assets/submissions.txt"
 student, assignment, submission status
 Chinemerem, Shell Navigation, not submitted
@@ -60,7 +60,7 @@ function check_submissions {
 }
 EOF
 
-# Populate reminder.sh
+# Work on reminder.sh
 cat << 'EOF' > "$app_dir/app/reminder.sh"
 #!/bin/bash
 
@@ -79,7 +79,7 @@ echo "--------------------------------------------"
 check_submissions $submissions_file
 EOF
 
-# Populate startup.sh
+# Works on startup.sh
 cat << 'EOF' > "$app_dir/startup.sh"
 #!/bin/bash
 
@@ -109,7 +109,7 @@ check_submissions "$submissions_file"
 echo "Reminder script executed successfully!"
 EOF
 
-# Populate README.md
+# Create a README.md file
 cat << EOF > "$app_dir/README.md"
 # Submission Reminder App
 
@@ -147,3 +147,4 @@ chmod +x "$app_dir/app/reminder.sh"
 echo "Environment setup completed! Run the application..."
 cd "$app_dir"
 ./startup.sh
+
