@@ -1,37 +1,149 @@
 #!/bin/bash
 
-# Prompt the user for their name
-echo "Enter your name:"
-read user_name
+# Prompt for user's name
+read -p "Enter your name: " userName
 
-# Define the main directory
-APP_DIR="submission_reminder_${user_name}"
+# Define main directory
+app_dir="submission_reminder_app_${userName}"
 
-# Create the main application directory
-mkdir -p "$APP_DIR"
+# Create directory structure
+mkdir -p "$app_dir/app"
+mkdir -p "$app_dir/modules"
+mkdir -p "$app_dir/assets"
+mkdir -p "$app_dir/config"
 
-# Create subdirectories
-mkdir -p "$APP_DIR/scripts"
-mkdir -p "$APP_DIR/config"
-mkdir -p "$APP_DIR/data"
+# Create necessary files
+touch "$app_dir/app/reminder.sh"
+touch "$app_dir/modules/functions.sh"
+touch "$app_dir/assets/submissions.txt"
+touch "$app_dir/config/config.env"
+touch "$app_dir/startup.sh"
+touch "$app_dir/README.md"
 
-# Move provided files to appropriate directories
-echo "Downloading necessary files..."
-mv config.env "$APP_DIR/config/"
-mv reminder.sh "$APP_DIR/scripts/"
-mv functions.sh "$APP_DIR/scripts/"
-mv submissions.txt "$APP_DIR/data/"
+# Works on config.env
+cat << EOF > "$app_dir/config/config.env"
+# This is the config file
+ASSIGNMENT="Shell Navigation"
+DAYS_REMAINING=2
+EOF
 
-# Ensure scripts are executable
-chmod +x "$APP_DIR/scripts/reminder.sh"
-chmod +x "$APP_DIR/scripts/functions.sh"
+# Works on submissions.txt with sample student records
+cat << EOF > "$app_dir/assets/submissions.txt"
+student, assignment, submission status
+Chinemerem, Shell Navigation, not submitted
+Chiagoziem, Git, submitted
+Divine, Shell Navigation, not submitted
+Anissa, Shell Basics, submitted
+EOF
 
-# Create startup.sh script
-echo -e "#!/bin/bash\n# Startup script for the submission reminder app\n\nsource ./scripts/functions.sh\nsource ./config/config.env\n\nbash ./scripts/reminder.sh\nsend_reminder" > "$APP_DIR/startup.sh"
-chmod +x "$APP_DIR/startup.sh"
+# Work on functions.sh
+cat << 'EOF' > "$app_dir/modules/functions.sh"
+#!/bin/bash
 
-# Create README.md
-echo -e "# Submission Reminder App\n\n## How to Run\n1. Navigate to the application directory:\n   \n   \`cd $APP_DIR\`\n\n2. Run the startup script:\n   \n   \`./startup.sh\`\n\nThis will check submissions and send reminders where necessary." > "$APP_DIR/README.md"
+# Function to read submissions file and output students who have not submitted
+function check_submissions {
+    local submissions_file=$1
+    echo "Checking submissions in $submissions_file"
 
-echo "Environment setup complete! Navigate to $APP_DIR and run ./startup.sh to start the application."
+    # Skip the header and iterate through the lines
+    while IFS=, read -r student assignment status; do
+        # Remove leading and trailing whitespace
+        student=$(echo "$student" | xargs)
+        assignment=$(echo "$assignment" | xargs)
+        status=$(echo "$status" | xargs)
 
+        # Check if assignment matches and status is 'not submitted'
+        if [[ "$assignment" == "$ASSIGNMENT" && "$status" == "not submitted" ]]; then
+            echo "Reminder: $student has not submitted the $ASSIGNMENT assignment!"
+        fi
+    done < <(tail -n +2 "$submissions_file") # Skip the header
+}
+EOF
+
+# Populate reminder.sh
+cat << 'EOF' > "$app_dir/app/reminder.sh"
+#!/bin/bash
+
+# Source environment variables and helper functions
+source ./config/config.env
+source ./modules/functions.sh
+
+# Path to the submissions file
+submissions_file="./assets/submissions.txt"
+
+# Print remaining time and run the reminder function
+echo "Assignment: $ASSIGNMENT"
+echo "Days remaining to submit: $DAYS_REMAINING days"
+echo "--------------------------------------------"
+
+check_submissions $submissions_file
+EOF
+
+# Populate startup.sh
+cat << 'EOF' > "$app_dir/startup.sh"
+#!/bin/bash
+
+# Load environment variables and functions
+source ./config/config.env
+source ./modules/functions.sh
+
+# Path to submission file
+submissions_file="./assets/submissions.txt"
+
+# Check if submissions file exists
+if [ ! -f "$submissions_file" ]; then
+    echo "Error: Submissions file ($submissions_file) is missing!"
+    exit 1
+fi
+
+# Display assignment details from the environment variables
+echo "Assignment: $ASSIGNMENT"
+echo "Days remaining to submit: $DAYS_REMAINING days"
+
+echo "----------------------------------------------"
+
+# Call the function to check submissions
+check_submissions "$submissions_file"
+
+# Reminder executable message
+echo "Reminder script executed successfully!"
+EOF
+
+# Populate README.md
+cat << EOF > "$app_dir/README.md"
+# Submission Reminder App
+
+This application is developed to help remind students about upcoming submissions. It checks the submission statuses and sends reminders notification based on the data provided.
+
+## Setup Instructions to follow:
+1. Run the setup script:
+   \`\`\`
+   chmod +x setup_all.sh
+   ./setup_all.sh
+   \`\`\`
+2. Navigate to the created directory and start the app:
+   \`\`\`
+   cd submission_reminder_app_${userName}/scripts
+   chmod +x startup.sh
+   ./startup.sh
+   \`\`\`
+
+## Project Structure:
+- \`reminder.sh\` → Runs the actual reminder logic.
+- \`functions.sh\` → Contains core utility functions that applications uses.
+- \`submissions.txt\` → Contains data about the students submissions that the app is monitoring.
+- \`config.env\` → Hold configuration settings of the application.
+- \`startup.sh\` → Initializes and starts the application.
+
+## Author:
+Developed by **${userName}**
+EOF
+
+# Make scripts executable
+chmod +x "$app_dir/modules/functions.sh"
+chmod +x "$app_dir/startup.sh"
+chmod +x "$app_dir/app/reminder.sh"
+
+echo "Environment setup completed! Run the application..."
+cd "$app_dir"
+./startup.sh
