@@ -140,9 +140,9 @@ Developed by **${userName}**
 EOF
 
 # Make scripts executable
-chmod +x "$app_dir/modules/functions.sh"
-chmod +x "$app_dir/startup.sh"
-chmod +x "$app_dir/app/reminder.sh"
+chmod 755 "$app_dir/modules/functions.sh"
+chmod 755 "$app_dir/startup.sh"
+chmod 755 "$app_dir/app/reminder.sh"
 
 echo "Environment setup completed! Run the application..."
 cd "$app_dir"
