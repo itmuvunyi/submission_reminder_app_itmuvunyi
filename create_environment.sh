@@ -4,7 +4,7 @@
 read -p "Enter your name: " userName
 
 # Define main directory
-app_dir="submission_reminder_app_${userName}"
+app_dir="submission_reminder_${userName}"
 
 # Create directory structure
 mkdir -p "$app_dir/app"
@@ -105,7 +105,7 @@ echo "----------------------------------------------"
 # Call the function to check submissions
 check_submissions "$submissions_file"
 
-# Reminder executable message
+# Reminder executable messagee
 echo "Reminder script executed successfully!"
 EOF
 
@@ -123,7 +123,7 @@ This application is developed to help remind students about upcoming submissions
    \`\`\`
 2. Navigate to the created directory and start the app:
    \`\`\`
-   cd submission_reminder_app_${userName}/scripts
+   cd submission_reminder_${userName}/scripts
    chmod +x startup.sh
    ./startup.sh
    \`\`\`

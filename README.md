@@ -10,7 +10,7 @@ This application is developed to help remind students about upcoming submissions
    ```
 2. Navigate to the created directory and start the app:
    ```
-   cd submission_reminder_app_itmuvunyi/scripts
+   cd submission_reminder_{userName}/scripts
    chmod +x startup.sh
    ./startup.sh
    ```
