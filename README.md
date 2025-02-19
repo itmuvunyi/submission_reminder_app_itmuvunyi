@@ -3,15 +3,24 @@
 This application is developed to help remind students about upcoming submissions. It checks the submission statuses and sends reminders notification based on the data provided.
 
 ## Setup Instructions to follow:
-1. Run the setup script:
+1. Clone a Repository:
    ```
-   chmod +x setup_all.sh
+   git clone https://github.com/itmuvunyi/submission_reminder_app_itmuvunyi.git
+   ```
+2. Run the environment script:
+   ```
+   cd submission_reminder_app_itmuvunyi
+   ./create_environment.sh
+   ```
+3. Run the setup script:
+   ```
+   chmod 755 setup_all.sh
    ./setup_all.sh
    ```
-2. Navigate to the created directory and start the app:
+4. Navigate to the created directory and start the app:
    ```
    cd submission_reminder_{userName}/scripts
-   chmod +x startup.sh
+   chmod 755 startup.sh
    ./startup.sh
    ```
 
