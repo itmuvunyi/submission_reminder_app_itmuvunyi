@@ -30,7 +30,8 @@ This application is developed to help remind students about upcoming submissions
 │── assets/
 │   └── submissions.txt
 │── startup.sh
-    ```
+
+```
 
 ## Project Structure:
 - `reminder.sh` → Runs the actual reminder logic.
