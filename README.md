@@ -18,6 +18,19 @@ This application is developed to help remind students about upcoming submissions
    chmod 755 startup.sh
    ./startup.sh
    ```
+### Structure of Directory
+    ```
+   submission_reminder_{YourName}/
+│── app/
+│   └── reminder.sh
+│── config/
+│   └── config.env
+│── modules/
+│   └── functions.sh
+│── assets/
+│   └── submissions.txt
+│── startup.sh
+```
 
 ## Project Structure:
 - `reminder.sh` → Runs the actual reminder logic.
