@@ -20,7 +20,7 @@ This application is developed to help remind students about upcoming submissions
    ```
 ## Structure of Directory
     ```
-   submission_reminder_{YourName}/
+    submission_reminder_{YourName}/
 │── app/
 │   └── reminder.sh
 │── config/
@@ -30,7 +30,6 @@ This application is developed to help remind students about upcoming submissions
 │── assets/
 │   └── submissions.txt
 │── startup.sh
-
     ```
 
 ## Project Structure:
