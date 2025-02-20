@@ -12,12 +12,7 @@ This application is developed to help remind students about upcoming submissions
    cd submission_reminder_app_itmuvunyi
    ./create_environment.sh
    ```
-3. Run the setup script:
-   ```
-   chmod 755 setup_all.sh
-   ./setup_all.sh
-   ```
-4. Navigate to the created directory and start the app:
+3. Navigate to the created directory and start the app:
    ```
    cd submission_reminder_{userName}/scripts
    chmod 755 startup.sh
