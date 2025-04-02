@@ -1,4 +1,4 @@
-My Ride - App
+# My Ride - App
 
 ## Table of Contents
 
@@ -124,6 +124,6 @@ Feel free to contribute by forking the repository and submitting pull requests.
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MyRide License.
 
 
