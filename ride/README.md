@@ -87,7 +87,7 @@ python myride.py
 1. **Continue as Driver**: Register/Login as a driver and add a trip.
 2. **Continue as Passenger**: Register and book a ride.
 3. **Find a Ride**: View available drivers and request a ride.
-4. **Admin Login**: Access the admin panel (use the keyword `myride`.
+4. **Admin Login**: Access the admin panel (use the keyword `myride`).
 5. **Exit**: Close the application.
 
 ## Code Structure
