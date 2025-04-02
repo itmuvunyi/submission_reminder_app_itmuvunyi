@@ -1,4 +1,4 @@
-de - App
+My Ride - App
 
 ## Table of Contents
 
