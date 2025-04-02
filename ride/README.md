@@ -15,7 +15,7 @@
 
 ## Overview
 
-MyRide is a ride-matching system designed to connect passengers with available drivers. The system provides functionalities for drivers to register, add trips, and for passengers to book rides based on available routes. An admin panel allows for monitoring of drivers and passengers.
+MyRide is a ride-matching system designed to connect passengers with available drivers. The system provides functionalities for drivers to register, add trips, and for passengers to book rides based on available routes. An admin panel allows drivers and passengers to be monitored.
 
 ## Features
 
@@ -33,18 +33,19 @@ Ensure you have the following installed:
 
 - Python 3.x
 - MySQL Server
-- Required Python libraries (see `requirements.txt`)
+- Required Python libraries (see `MYSQL Client`)
 
 ### Steps to Install
 
 1. Clone this repository:
    ```sh
-   git clone https://github.com/yourusername/myride.git
+   git clone https://github.com/semanaparfait/myride.git
    cd myride
    ```
 2. Install required dependencies:
    ```sh
-   pip install -r requirements.txt
+   pip install mysqlclient
+   pip install geopy
    ```
 3. Configure the database connection in `my_conn` dictionary within the script.
 
@@ -114,9 +115,9 @@ python myride.py
 
 ## Troubleshooting
 
-- If database connection fails, check credentials in `my_conn`.
+- If the database connection fails, check credentials in `my_conn`.
 - Ensure MySQL service is running.
-- If geolocation lookup fails, check internet connection.
+- If geolocation lookup fails, check the internet connection.
 
 ## Contributing
 
